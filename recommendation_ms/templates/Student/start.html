@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="shsa384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <title>Course Recommendation</title>
+</head>
+<body>
+  <div class="overlay_color"></div>
+    <div class="regform" >
+      
+     <div >
+        <img src="https://i.ibb.co/p05H9j0/246738642-1312989249161669-8722645006192496377-n.png" width="50px" height="auto" alt="wmsu logo">
+        <h1>Course Recommendation System</h1>
+     </div>
+    
+    </div>
+    <div class="main">
+      <br>
+       <div id="stud_name">
+          <h2 class="name" style="display: inline-block;">Name</h2>
+          <input type="text" class="stud_name" id="stud_name  " name="stud_name">
+       </div>
+          <form action="{{ url_for('start_pred')}}"method="POST">
+            <div id="name">
+              <br>
+              <input type="number" step='any' class="Oapr" name="Oapr" ><br>
+              <label for="" class="l_oapr">OAPR</label>
+              <input type="number" step='any' class="Pr1" name="Pr1"><br>
+              <label for="" class="l_eng">English</label>
+
+
+            </div>
+            <div id="name">
+
+            
+              <input type="number" step='any' class="Pr2" name="Pr2"><br>
+              <label for="" class="l_read">Reading</label>
+              <input type="number" step='any' class="Pr3" name="Pr3"><br>
+              <label for="" class="l_science">Science</label>
+
+
+            </div>
+            <div id="name">
+              <input type="number" step='any' class="Pr4" name="Pr4"><br>
+              <label for="" class="l_math">Math</label>
+              <input type="number" step='any' class="Pr5" name="pr5"><br>
+              <label for="" class="l_logic">Logic</label>
+            </div>
+            
+            <!-- <div class="sub">
+              Predict
+            </div> -->
+            
+
+            
+        <a href="/end">
+          
+          <button type="submit" class="sub">Predict</button>
+    </a>
+  </form>
+
+
+    </div>
+    
+    
+</body>
+</html>
+
+<script>
+  var text = document.getElementById('stud_name').innerHTML;
+  localStorage["key"] = text;
+
+</script>
+<style>
+  @import "https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap";
+
+  *{
+    margin: 0;
+    padding: 0;
+  }
+
+  body{
+    background: url("https://i.ibb.co/m4Jh4GK/307880590-1076164276427928-1114792089345060065-n.png");
+    background-position: center;
+    background-size: cover;
+    font-family: sans-serif ;
+    
+    
+    
+  }
+  
+  .overlay_color{
+    
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 0, 0, 0.4);
+    position:absolute;
+    border-collapse: collapse;
+    z-index: -5;
+    
+  }
+
+  .regform{
+    width: 800px;
+    background-color: rgb(0, 0, 0,6);
+    margin: auto;
+    color: #FFFFFF;
+    padding: 20px 0px 10px 0px;
+    text-align: center;
+    border-radius: 15px 15px 0px 0px;
+    margin-top: 70px;
+
+
+  }
+  img {
+    top: 80px;
+    left: 420px;
+    position:absolute;
+    border-collapse: collapse;
+    z-index: 1;
+  }
+
+  h1{
+    padding-left: 100px;
+  }
+
+  .main{
+    background-color: rgb(0, 0, 0,0.7);
+    width: 800px;
+    margin: auto;
+    
+  }
+
+  form{
+    padding: 20px 10px 10px 10px;
+   
+
+    
+  }
+  
+
+  #name{
+    width: 100%;
+    height: 100px;
+  }
+  .name{
+    
+    color: white;
+    font-size: 25px;
+    font-weight: 600;
+    margin-left: 80px;
+
+  }
+  .stud_name{
+    position: relative;
+    width: 500px;
+    line-height: 40px;
+    border-radius: 6px;
+    padding: 0 22px;
+    font-size: 16px;
+    margin-left: 4px;
+
+  }
+
+  .Oapr{
+    position: relative;
+    left: 150px;
+    top: 10px;
+    line-height: 40px;
+    border-radius: 6px;
+    padding: 0 22px;
+    font-size: 16px;
+
+  }
+
+  .Pr1{
+    position: relative;
+    left: 400px;
+    top: -34px;
+    line-height: 40px;
+    border-radius: 6px;
+    padding: 0 22px;
+    font-size: 16px;
+  }
+
+  .l_oapr{
+    position: relative;
+    color: #FFFFFF;
+    text-transform: capitalize;
+    font-size: 18px;
+    left: 150px;
+    top: 1px;
+  }
+
+  .l_eng{
+    position: relative;
+    color: #FFFFFF;
+    text-transform: capitalize;
+    font-size: 18px;
+    left: 460px;
+    top: -34px;
+  }
+
+  .Pr2{
+    position: relative;
+    left: 150px;
+    top: 10px;
+    line-height: 40px;
+    border-radius: 6px;
+    padding: 0 22px;
+    font-size: 16px;
+
+  }
+
+  .Pr3{
+    position: relative;
+    left: 383px;
+    top: -32px;
+    line-height: 40px;
+    border-radius: 6px;
+    padding: 0 22px;
+    font-size: 16px;
+  }
+
+  .l_read{
+    position: relative;
+    color: #FFFFFF;
+    text-transform: capitalize;
+    font-size: 18px;
+    left: 150px;
+    top: 1px;
+  }
+
+  .l_science{
+    position: relative;
+    color: #FFFFFF;
+    text-transform: capitalize;
+    font-size: 18px;
+    left: 460px;
+    top: -30px;
+  }
+
+  .Pr4{
+    position: relative;
+    left: 150px;
+    top: -5px;
+    line-height: 40px;
+    border-radius: 6px;
+    padding: 0 22px;
+    font-size: 16px;
+
+  }
+
+  .Pr5{
+    position: relative;
+    left: 412px;
+    top: -49px;
+    line-height: 40px;
+    border-radius: 6px;
+    padding: 0 22px;
+    font-size: 16px;
+  }
+
+  .l_math{
+    position: relative;
+    color: #FFFFFF;
+    text-transform: capitalize;
+    font-size: 18px;
+    left: 150px;
+    top: -17px;
+  }
+
+  .l_logic{
+    position: relative;
+    color: #FFFFFF;
+    text-transform: capitalize;
+    font-size: 18px;
+    left: 460px;
+    top: -48px;
+  }
+
+  a{
+    text-decoration: none;
+  }
+
+  button{
+    position:relative;
+    top: 50%;
+    left:54%;
+    transform: translate(-50%,-50%);
+    width: 160px;
+    height: 50px;
+    background: linear-gradient(to top, #DC143C,#EC3257,#F05C79);
+    color:#fff;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 0 15px 30px rgba(0, 0, 0,0.9);    
+    letter-spacing: 2px;
+    font-size: 20px;
+    font-family: Poppins;
+
+}
+
+
+</style>

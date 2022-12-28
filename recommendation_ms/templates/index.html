@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>register form</title>
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="{{url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+   
+<div class="form-container">
+
+   <form action="/login_form.php" method="POST" >
+        <h3>Course Recommendation System</h3>
+      <h4 class="wmsu" >Western Mindanao State University</h4>
+      <br>
+       <a href="/register_form" name="submit" class="form-btn" >Student</a>
+       <a href="/admin_log" name="submit" class="form-btn" >Admin</a>
+ 
+   </form>
+
+</div>
+</body>
+</html>
+
