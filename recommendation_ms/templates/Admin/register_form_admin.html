@@ -52,21 +52,74 @@
    
 <div class="form-container">
 
-   <form action="" method="POST">
+   <form action="{{ url_for('_route_admin.register_admin')}}" method="POST">
+      
+      <div>
+         {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+               {% for category, message in messages %}
+                  {% if category == 'success_register' %}
+                     <div class="">
+                        <div class="">
+                           <div class="">
+                              <div style="padding: 10%; color: rgb(47, 241, 47); font-size: 25px; font-weight: 700">
+                                 <center>
+                                    {{ message }}
+                                 </center>
+                                 <script>
+                                    window.setTimeout(function () {
+                                       window.location.reload();
+                                      }, 3000);
+                                 </script>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  {% elif category == 'error' %}
+                     <div class="">
+                        <div class="">
+                           <div class="">
+                              <div style="padding: 10%; color: rgb(180, 29, 29); font-size: 25px; font-weight: 700">
+                                 <center>
+                                    {{ message }}
+                                 </center>
+                                 <script>
+                                    window.setTimeout(function () {
+                                       window.location.reload();
+                                    }, 3000);
+                                 </script>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  {% elif category == 'info' %}
+                     <div class="">
+                        <div class="">
+                           <div class="">
+                              <div style="padding: 10%; color: rgb(47, 241, 47);	 font-size: 25px; font-weight: 700">
+                                 <center>
+                                    {{ message }}
+                                 </center>
+                                 <script>
+                                    window.setTimeout(function () {
+                                       window.location.reload();
+                                    }, 3000);
+                                 </script>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  {% endif %}
+               {% endfor %}
+            {% endif %}
+         {% endwith %}
+      </div>
       <h3>Register now</h3>
-      <!-- <?php
-      // if(isset($error)){
-      //    foreach($error as $error){
-      //       echo '<span class="error-msg">'.$error.'</span>';
-      //    };
-      // };
-      ?> -->
       <input type="text" name="first_name" required placeholder="Enter your First name">
       <input type="text" name="middle_name" required placeholder="Enter your Middle name">
       <input type="text" name="last_name" required placeholder="Enter your Last name">
       <input type="email" name="email" required placeholder="Enter your email">
       <input type="password" name="password" required placeholder="Enter your password">
-      <input type="password" name="cpassword" required placeholder="Confirm your password">
       <input type="password" name="code" required placeholder="Code">
       <input type="text" name="user_type" required placeholder="Admin" value="Admin" readonly="true">
 
@@ -75,7 +128,7 @@
          <option value="admin">Admin</option>
       </select> -->
       <input type="submit" name="submit" value="register now" class="form-btn">
-      <p>Already have an account? <a href="/admin_log">Login now</a></p>
+      <p>Already have an account? <a href="/login_admin_form">Login now</a></p>
    </form>
 
 </div>

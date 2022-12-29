@@ -18,7 +18,11 @@
 	<section id="sidebar">
 		<a href="#" class="brand">
          <img src="https://i.ibb.co/p05H9j0/246738642-1312989249161669-8722645006192496377-n.png" width="25%"  style="padding:5%" height="auto">
-			<span class="text">Admin</span>
+			<span class="text">	
+				{% block content %}
+					{{ auth_user.first_name }} {{ auth_user.middle_name}}  {{ auth_user.last_name}}
+				{% endblock %}
+			</span>
 		</a>
 		<ul class="side-menu top">
 			<li class="active">
@@ -45,7 +49,7 @@
 		<ul class="side-menu">
 			
 			<li>
-				<a href="/admin_log" class="logout">
+				<a href="/logout" class="logout">
 					<i class='bx bxs-log-out-circle' ></i>
 					<span class="text">Logout</span>
 				</a>
@@ -83,51 +87,136 @@
 			</div>
 
 			<div class="table-data">
+				
 				<div class="order">
 					<div class="head">
 						<h3>Student Details </h3>
-					
 					</div>
-					<table>
-						<thead>
+					<div>
+						<table>
+						  <thead>
 							<tr>
-								<th>ID</th>
-								<th>Student Name</th>
-								<th>Gender</th>
-								<th>Athlete</th>
-								<th>Leader</th>
-								<th>SHS Track</th>
-								<th>SHS School</th>
-								<th>SHS GPA</th>
-								<th>OAPR</th>
-								<th>English</th>
-                                <th>Reading</th>
-								<th>Science</th>
-								<th>Math</th>
-								<th>Logic</th>
+							  <th style="text-align: center">Student Name</th>
+							  <th style="text-align: center">Gender</th>
+							  <th style="text-align: center">Athlete</th>
+							  <th style="text-align: center">Leader</th>
+							  <th style="text-align: center">SHS Track</th>
+							  <th style="text-align: center">SHS School</th>
+							  <th style="text-align: center">SHS GPA</th>
+							  <th style="text-align: center">OAPR</th>
+							  <th style="text-align: center">English</th>
+							  <th style="text-align: center">Reading</th>
+							  <th style="text-align: center">Science</th>
+							  <th style="text-align: center">Math</th>
+							  <th style="text-align: center">Logic</th>
+							  <th style="text-align: center">Date Registered</th>
+							  <!-- <th style="text-align: center">Desired Career</th>
+							  <th style="text-align: center">Prediction Results</th>
+							  <th style="text-align: center">Date Predicted</th> -->
+							  <th style="text-align: center">Action</th>
 							</tr>
-						</thead>
-						<tbody>
-							{% for row in d %}
+						  </thead>
+						  <tbody>
+							{% if students_record %}
+							  {% for user, pred_results, stud_details in students_record.items %}
 								<tr>
-									<td>{{ row.id }}</td>
-                                    <td></td>
-									<td>{{ row.gender }}</td>
-									<td>{{ row.athlete }}</td>
-									<td>{{ row.leader }}</td>
-									<td>{{ row.track }}</td>
-									<td>{{ row.school }}</td>
-									<td>{{ row.gpa }}</td>
-									<td>{{ row.oapr }}</td>
-									<td>{{ row.english }}</td>
-									<td>{{ row.reading }}</td>
-                                    <td>{{ row.science }}</td>
-									<td>{{ row.math }}</td>
-									<td>{{ row.logic }}</td>
+								  <td>
+									<span>{{ user.first_name }}</span>
+									<span>{{ user.middle_name }}</span>
+									<span>{{ user.last_name }} </span>
+								  </td>
+								  <td>
+									<span style="margin: 5px">{{ stud_details.gender }}</span>
+								  </td>
+								  <td>
+									<span style="margin: 5px">{{ stud_details.athlete }}</span>
+								  </td>
+								  <td>
+									<span style="margin: 5px">{{ stud_details.leader }}</span>
+								  </td>
+								  <td>
+									<span style="margin: 5px">{{ stud_details.track }}</span>
+								  </td>
+								  <td>
+									<span style="margin: 5px">{{ stud_details.school }}</span>
+								  </td>
+								  <td>
+									<span style="margin: 5px">{{ stud_details.gpa }}</span>
+								  </td>
+								  <td>
+									<span style="margin: 5px">{{ pred_results.oapr }}</span>
+								  </td>
+								  <td>
+									<span style="margin: 5px">{{ pred_results.english }}</span>
+								  </td>
+								  <td>
+									<span style="margin: 5px">{{ pred_results.reading }}</span>
+								  </td>
+								  <td>
+									<span style="margin: 5px">{{ pred_results.science }}</span>
+								  </td>
+								  <td>
+									<span style="margin: 5px">{{ pred_results.math }}</span>
+								  </td>
+								  <td>
+									<span style="margin: 5px">{{ pred_results.logic }}</span>
+								  </td>
+								  <td>
+									<span style="margin: 5px">{{ user.date_created }}</span>
+								  </td>
+								  <td>
+									<!-- 
+									  class should be inline
+									-->
+									<div style="display: flex">
+									  <form action="/delete_student" method="POST">
+										<input type="hidden" name="user_id" value="{{ user.id }}">
+										<button type="submit" style="padding: 10px; margin: 5px" class="hybridBtn"> Delete </button>
+									  </form>
+									</div>
+								  </td>
 								</tr>
-							{% endfor %}
-						</tbody>
-					</table>
+							  {% endfor %}
+							{% endif %}
+						  </tbody>
+						</table>
+						<div style="margin: 10px; display: flex; justify-content: center">
+							<div style="background: rgba(255, 255, 255, 0.795); width: 25%; height: auto; margin: 30px; border-radius: 10px" ><canvas id="myChart"></canvas></div>
+							<div style="background: rgba(255, 255, 255, 0.795); width: 25%; height: auto; margin: 30px; border-radius: 10px" ><canvas id="mypieChart"></canvas></div>
+							<div style="background: rgba(255, 255, 255, 0.795); width: 25%; height: auto; margin: 30px; border-radius: 10px" ><canvas id="myChartStat"></canvas></div>
+						</div>
+						<div class="" style="color: white; margin-left: 50%">
+						  {% if students_record %}
+							  {% for page_num in students_record.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+								  {% if page_num  %}
+									  {% if students_record.page == page_num  %}
+										{% if search  %}
+										  <a class="" href="{{ url_for('_route_admin.admin_dashboard', page=page_num, search=search) }}">{{ page_num }}</a>
+										{% elif track %}
+										  <a class="" href="{{ url_for('_route_admin.admin_dashboard', page=page_num, track=track) }}">{{ page_num }}</a>
+										{% elif gender %}
+										  <a class="" href="{{ url_for('_route_admin.admin_dashboard', page=page_num, gender=gender) }}">{{ page_num }}</a>
+										{% else %}
+										  <a class="" href="{{ url_for('_route_admin.admin_dashboard', page=page_num) }}">{{ page_num }}</a>
+										{% endif %}
+		
+									  {% else %}
+										{% if search  %}
+										  <a class="" href="{{ url_for('_route_admin.admin_dashboard', page=page_num, search=search) }}">{{ page_num }}</a>
+										{% elif track %}
+										  <a class="" href="{{ url_for('_route_admin.admin_dashboard', page=page_num, track=track) }}">{{ page_num }}</a>
+										{% elif gender %}
+										  <a class="" href="{{ url_for('_route_admin.admin_dashboard', page=page_num, gender=gender) }}">{{ page_num }}</a>
+										{% else %}
+										  <a class="" href="{{ url_for('_route_admin.admin_dashboard', page=page_num) }}">{{ page_num }}</a>
+										{% endif %}
+									  {% endif %}
+								  {% else %}
+									  ...
+								  {% endif %}
+							  {% endfor %}
+						  {% endif %}
+					  </div>
 				</div>
 				
 			</div>
@@ -137,7 +226,93 @@
 	<!-- CONTENT -->
 	
 
-	<script src="script.js"></script>
+	<!-- <script src="script.js"></script> -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script>
+		male = JSON.parse({{ male  | tojson}})
+        female = JSON.parse({{ female  | tojson}})
+
+		const ctx = document.getElementById('myChart');
+		const ctxStat = document.getElementById('myChartStat');
+
+		new Chart(ctx, {
+			type: 'bar',
+			data: {
+			  labels: ['Female', 'Male'],
+			  datasets: [{
+				label: '# of Student',
+				data: [female, male],
+				borderWidth: 1
+			  }]
+			},
+			options: {
+			  scales: {
+				y: {
+				  beginAtZero: true
+				}
+			  }
+			}
+		  });
+		
+		
+		new Chart(ctxStat, {
+			type: 'line',
+			data: {
+			  labels: ['Female', 'Male'],
+			  datasets: [{
+				label: '# of Student',
+				data: [female, male],
+				borderWidth: 1
+			  }]
+			},
+			options: {
+			  scales: {
+				y: {
+				  beginAtZero: true
+				}
+			  }
+			}
+		  });
+		
+		let pieChart = new Chart(mypieChart, {
+			type: 'pie',
+			data: {
+			labels: ['Female', 'Male'],
+				datasets: [{
+					label: "# of Student",
+					data: [female, male],
+					backgroundColor: ['#5DA5DA ', '#FAA43A', '#60BD68',
+						'#B276B2', '#E16851', '#FB8267'],
+
+					fontColor: "white",
+					borderWidth: 1,
+					hoverBorderColor: "black",
+					hoverBorderWidth: 2,
+					hoverBackgroundColor: 'rgba(154, 245, 140)',
+					pointHoverRadius: 5
+				}],
+			},
+			options: {
+					title: {
+						display: true,
+							text: "Female and Male",
+								fontSize: 20,
+								fontColor: "white"
+					},
+					legend: {
+						position: "right",
+							labels: {
+							fontColor: "white"
+						},
+						display: true,
+					},
+
+					elements: {
+						hitRadius: 3,
+				}
+			}
+		})
+	</script>
 </body>
 </html>
 

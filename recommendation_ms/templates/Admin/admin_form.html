@@ -56,19 +56,72 @@
    
 <div class="form-container">
 
-   <form action="" method="POST">
+   <div>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+         {% if messages %}
+            {% for category, message in messages %}
+               {% if category == 'success_register' %}
+                  <div class="">
+                     <div class="">
+                        <div class="">
+                           <div style="padding: 10%; color: rgb(47, 241, 47); font-size: 25px; font-weight: 700">
+                              <center>
+                                 {{ message }}
+                              </center>
+                              <script>
+                                 window.setTimeout(function () {
+                                    window.location.reload();
+                                   }, 3000);
+                              </script>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               {% elif category == 'error' %}
+                  <div class="">
+                     <div class="">
+                        <div class="">
+                           <div style="padding: 10%; color: rgb(180, 29, 29); font-size: 25px; font-weight: 700">
+                              <center>
+                                 {{ message }}
+                              </center>
+                              <script>
+                                 window.setTimeout(function () {
+                                    window.location.reload();
+                                 }, 3000);
+                              </script>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               {% elif category == 'info' %}
+                  <div class="">
+                     <div class="">
+                        <div class="">
+                           <div style="padding: 10%; color: rgb(47, 241, 47);	 font-size: 25px; font-weight: 700">
+                              <center>
+                                 {{ message }}
+                              </center>
+                              <script>
+                                 window.setTimeout(function () {
+                                    window.location.reload();
+                                 }, 3000);
+                              </script>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               {% endif %}
+            {% endfor %}
+         {% endif %}
+      {% endwith %}
+   </div>
+   <form action="{{ url_for('_route_admin.login_admin')}}" method="POST">
       <h3>Admin Login</h3>
-      <!-- <?php
-      if(isset($error)){
-         foreach($error as $error){
-            echo '<span class="error-msg">'.$error.'</span>';
-         };
-      };
-      ?> -->
       <input type="email" name="email" required placeholder="Enter your email">
       <input type="password" name="password" required placeholder="Enter your password">
       <input type="submit" name="submit" value="login now" class="form-btn">
-      <p>Don't have an account? <a href="/reg_admin">Register now</a></p>
+      <p>Don't have an account? <a href="/register_form_admin">Register now</a></p>
    </form>
 
 </div>

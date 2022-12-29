@@ -21,23 +21,32 @@
 			<span class="text">Student</span>
 		</a> -->
 		<section id="sidebar">
+			<a href="#" class="brand">
+	
+				<i class='bx bxs-dashboard' ></i>
+				<span class="text">Student Dashboard</span>
+			</a>
 		
-		<ul class="side-menu top">
-         <li  style="padding-left:25%">
-          <img src="https://i.ibb.co/p05H9j0/246738642-1312989249161669-8722645006192496377-n.png" width="50%"  style="padding:5%" height="auto">
-				<a href="/stud_log" class="profile">
-					
-					<span class="text">Edit Profile</span>
-				</a>
-			</li>
-			<br>
-			<li>
-				<a href="/stud_log" class="logout">
-					<i class='bx bxs-log-out-circle' ></i>
-					<span class="text">Logout</span>
-				</a>
-			</li>
-		</ul>
+			<ul class="side-menu top">
+				<li class="active">
+					<div class="wrapper">
+					<img src="https://i.ibb.co/p05H9j0/246738642-1312989249161669-8722645006192496377-n.png" width="25%"  height="auto">
+						<div class="left">
+							<button id="myBtn">
+								{% block content %}
+									{{ auth_user.first_name }} {{ auth_user.middle_name}}  {{ auth_user.last_name}}
+								{% endblock %}
+							</button>
+						</div>
+						<br><br>
+						<a href="/student_page" class="logout">
+							<i class='bx bxs-log-out-circle' ></i>
+							<span class="text">Back</span>
+						</a> 
+
+					</div>
+				</li>
+			</ul>
 	</section>
 	</section>
 	<!-- SIDEBAR -->
@@ -325,7 +334,7 @@ body {
 	padding: 4px;
 }
 #sidebar .side-menu li.active {
-	background: var(--grey);
+	
 	position: relative;
 }
 #sidebar .side-menu li.active::before {
@@ -336,7 +345,7 @@ body {
 	border-radius: 50%;
 	top: -40px;
 	right: 0;
-	box-shadow: 20px 20px 0 var(--grey);
+	
 	z-index: -1;
 }
 #sidebar .side-menu li.active::after {
@@ -347,7 +356,7 @@ body {
 	border-radius: 50%;
 	bottom: -40px;
 	right: 0;
-	box-shadow: 20px -20px 0 var(--grey);
+	
 	z-index: -1;
 }
 #sidebar .side-menu li a {
@@ -381,6 +390,42 @@ body {
 	justify-content: center;
 }
 /* SIDEBAR */
+
+/*user-profile*/
+.wrapper{
+	position: absolute;
+	top:50%;
+	width: 450px;
+	box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
+	text-align: center;
+}
+.wrapper img{
+	display: flex;
+	justify-content: center;
+	margin-left:20%;
+}
+.wrapper .left{
+	width: 35%;
+	padding: 30px 25px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	text-align: center;
+	margin-left:15%;
+}
+
+.wrapper button{
+	padding: 0;
+	border: none;
+	background: none;
+
+}
+
+.wrapper button:hover{
+	cursor: pointer;
+	color: crimson;
+
+}
+
 
 
 

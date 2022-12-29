@@ -72,7 +72,16 @@ def Home():
 def student_page():
     auth_user=current_user
     if auth_user.user_type == 1:
-        return render_template("Student/student_page.html", auth_user=auth_user)
+        return render_template("Student/student_page_details.html", auth_user=auth_user)
+    else:
+        return redirect(url_for('_auth.index'))
+
+@_route_student.route('/student_page_prediction', methods=['GET'])
+@login_required
+def student_page_prediction():
+    auth_user=current_user
+    if auth_user.user_type == 1:
+        return render_template("Student/student_page_prediction.html", auth_user=auth_user)
     else:
         return redirect(url_for('_auth.index'))
     
@@ -108,7 +117,7 @@ def register_form():
 @_route_student.route('/register_student', methods=['POST'])
 def register_student():
      try:
-        new_user = User(request.form['first_name'], request.form['middle_name'], request.form['last_name'], request.form['email'],  (generate_password_hash(request.form['password'], method="sha256")), False, 1)
+        new_user = User(request.form['first_name'], request.form['middle_name'], request.form['last_name'], request.form['email'],  (generate_password_hash(request.form['password'], method="sha256")), False, False, False, 1)
         db.session.add(new_user)
         db.session.commit()
         flash('Account successfully created', category='success_register')
@@ -117,21 +126,29 @@ def register_student():
           flash('Invalid credentials', category='error')
           return redirect(url_for('.register_form'))     
       
-@_route_student.route('/register_student_details', methods=['POST'])
+@_route_student.route('/register_student_details', methods=["GET", "POST"])
 def register_student_details():
-     try:
-        date_pred = datetime.now()
-        new_user = StudentDetails(request.form['stud_gender'], request.form['stud_athlete'], request.form['stud_leader'], request.form['stud_school'],  request.form['stud_gpa'], current_user.id, date_registered=date_pred)
-        db.session.add(new_user)
-        db.session.commit()
-        # flash('Account successfully created', category='success_register')
-        return redirect(url_for('.prediction_result'))
-     except:
-          flash('Invalid credentials', category='error')
-          return redirect(url_for('.student_page'))     
-
-
-
+    auth_user=current_user
+    
+    # details_score = select(StudentDetails).filter(StudentDetails.detail_no == StudentDetails.detail_no).where(User.id == int(auth_user.id))
+    # print(details_score)
+    if auth_user.detail_no == False:
+        try:
+            date_pred = datetime.now()
+            new_user = StudentDetails(request.form['stud_gender'], request.form['stud_athlete'], request.form['stud_leader'], request.form['stud_track'], request.form['stud_school'],  request.form['stud_gpa'], current_user.id, date_registered=date_pred)
+            db.session.add(new_user)
+            approve_account = User.query.filter_by(id=int(auth_user.id)).first()
+            approve_account.detail_no = True 
+            db.session.commit()
+            # flash('Account successfully created', category='success_register')
+            return redirect(url_for('.student_page_prediction'))
+        except:
+            flash('Sorry you can only add details and prediction once', category='error')
+            return redirect(url_for('.student_page'))
+    else: 
+        flash('Sorry you can only add details and prediction once', category='error')
+        return redirect(url_for('.student_page'))
+    
 @_route_student.route('/login_student', methods=['GET', 'POST'])
 def login_student():
     auth_user=current_user
@@ -159,13 +176,13 @@ def login_student():
 
 @_route_student.route("/start_pred", methods=["GET", "POST"])
 def start_pred():
-
-     # cur =mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-     # cur.execute('SELECT * FROM course_des')
-     # fetch_data= cur.fetchall()
+    
     auth_user=current_user
-    if request.method== 'GET':
-        return render_template("Student/student_page.html")
+    # check_detail_no = db.session.query(StudentDetails).filter(StudentDetails.detail_no)
+    
+    if auth_user.predict_no == True:
+        flash('Sorry you can only add details and prediction once', category='error')
+        return redirect(url_for('.student_page'))
     else:
         float_features = [float(x) for x in request.form.values()]
         features = [np.array(float_features)]
@@ -253,8 +270,11 @@ def start_pred():
             
             date_pred = datetime.now()
         
-            new_pred = PredictionResult(fetchPred2, pred2, pred3, pred1, request.form['Oapr'], request.form['Pr1'], request.form['Pr2'], request.form['Pr3'], request.form['Pr4'],  request.form['Pr5'], current_user.id, date_predicted=date_pred)
+            new_pred = PredictionResult(pred2, pred3, pred1, request.form['Oapr'], request.form['Pr1'], request.form['Pr2'], request.form['Pr3'], request.form['Pr4'],  request.form['Pr5'], current_user.id, date_predicted=date_pred)
             db.session.add(new_pred)
+            
+            approve_account = User.query.filter_by(id=int(auth_user.id)).first()
+            approve_account.predict_no = True
             db.session.commit()
             
 

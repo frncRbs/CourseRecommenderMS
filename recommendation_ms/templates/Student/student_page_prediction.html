@@ -21,7 +21,7 @@
 			<i class='bx bxs-dashboard' ></i>
 			<span class="text">Student Dashboard</span>
 		</a>
-	
+		
 		<ul class="side-menu top">
 			<li class="active">
 				<div class="wrapper">
@@ -37,63 +37,25 @@
 					<a href="/logout" class="logout">
 						<i class='bx bxs-log-out-circle' ></i>
 						<span class="text">Logout</span>
-					</a> 
-
+					</a>
 				</div>
-					
-					
 			</li>
 			<li>
-				
-				
-				
 			</li>
-
 			<li>
-				
 			</li>
-			<!-- <li>
-				<a href="#">
-					<i class='bx bxs-message-dots' ></i>
-					<span class="text">Message</span>
-				</a>
-			</li> -->
-			
 		</ul>
 		<ul class="side-menu">
 			<li>
-			
-				
 			</li>
 			<li>
-
-				
 			</li>
-
 		</ul>
 	</section>
-	<!-- SIDEBAR -->
-
-
-
-	<!-- CONTENT -->
 	<section id="content">
-		<!-- NAVBAR -->
 		<nav>
 			<i class='bx bx-menu' ></i>
-		
-			<!-- <form action="#">
-				<div class="form-input">
-					<input type="search" placeholder="Search...">
-					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
-				</div>
-			</form> -->
-		
-			
 		</nav>
-		<!-- NAVBAR -->
-
-		<!-- MAIN -->
 		<main>
     <div class="head-title">
 				<div class="left">
@@ -104,125 +66,59 @@
 			</div>
 			<ul class="box-info">
 			<li>
-            <div  class="form-container">
-				<form id="" action="{{ url_for('_route_student.register_student_details')}}" method="POST">
-					<label for="">Gender</label>
-							<!-- <select  name="gender" >
-							<option value=""></option>
-							<option value="m">Male</option>
-							<option value="f">Female</option>
-							</select> -->
-							<input type="text" step='any' class="Oapr" name="stud_gender" >
-					<label for="">Are you an Athlete</label>
-							<!-- <select  name="athlete" >
-								<option value=""></option>
-								<option value="Yes">Yes</option>
-								<option value="No">No</option>
-							</select> -->
-							<input type="text" step='any' class="Oapr" name="stud_athlete" >
-					<label for="">Are you a Student Leader</label>
-							<!-- <select  name="leader" >
-							<option value=""></option>
-							<option value="Yes">Yes</option>
-							<option value="No">No</option>
-							</select> -->
-							<input type="text" step='any' class="Oapr" name="stud_leader" >
+				<div class="form-container">
+				<form id="formStartPred" action="{{ url_for('_route_student.start_pred')}}" method="POST">
+				<div id="name">
+			
+				<h3>CET Results</h3>
+				<label for="" class="l_oapr">OAPR</label>
+				<input type="number" step='any' class="Oapr" name="Oapr" ><br>
 
-							<br><br>
-							<h3>SHS Background</h3>
-					<label for="" class="l_oapr">SHS Track</label>
-						<!-- <select  name="track" >
-							<option value=""></option>
-							<option value="STEM">STEM</option>
-							<option value="ABM">ABM</option>
-							<option value="HUMSS">HUMSS</option>
-							<option value="GAS">GAS</option>
-							<option value="AFA">TVL-AFA</option>
-							<option value="HE">TVL-HE</option>
-							<option value="IA">TVL-IA</option>
-							<option value="ICT">TVL-ICT</option>
-							<option value="ARTS AND DESIGN">ARTS AND DESIGN</option>
-							<option value="SPORTS">SPORTS</option>
-							</select> -->
-					<input type="text" step='any' class="Oapr" name="stud_track" >
-					<label for="" class="l_oapr">SHS School</label>
-					<input type="text" step='any' class="Oapr" name="stud_school" >
-					<label for="" class="l_oapr">SHS GPA</label>
-					<input type="number" step='any' class="Oapr" name="stud_gpa" ><br>
+				<label for="" class="l_eng">English</label>
+				<input type="number" step='any' class="Pr1" name="Pr1"><br>
+
+				<label for="" class="l_read">Reading</label>
+				<input type="number" step='any' class="Pr2" name="Pr2"><br>
+
+				<label for="" class="l_science">Science</label>
+				<input type="number" step='any' class="Pr3" name="Pr3"><br>
+
+				<label for="" class="l_math">Math</label>
+				<input type="number" step='any' class="Pr4" name="Pr4"><br>
+
+				<label for="" class="l_logic">Logic</label>
+				<input type="number" step='any' class="Pr5" name="Pr5"><br>
+				</div>
+			</li>
+				</ul>
+		<!-- <a href="/result" name="submit"  class="form-btn"  type="submit"><button>Student</button></a> -->
+				<button type="submit" class="form-btn" id="btn1">PREDICT</button>
+
+				<style> 
+				.form-btn{
+						background: crimson;
+						color:crimson;
+						text-transform: capitalize;
+						cursor: pointer;
+						width: 10%;
+						padding:15px 20px;
+						font-size: 17px;
+						margin:8px 0;
+						background: #eee;
+						border-radius: 10px;
+						display: flex;
+						justify-content:center;
 					
-					<button type="submit" class="form-btn" id="btn2" style="display: none;">PREDICT</button>
-				</form>
-            </div>
-				</li>
-				<li>
-            <div class="form-container">
-               <form id="" action="{{ url_for('_route_student.start_pred')}}" method="POST">
-               <div id="name">
-           
-               <h3>CET Results</h3>
-               <label for="" class="l_oapr">OAPR</label>
-               <input type="number" step='any' class="Oapr" name="Oapr" ><br>
-
-               <label for="" class="l_eng">English</label>
-               <input type="number" step='any' class="Pr1" name="Pr1"><br>
-
-               <label for="" class="l_read">Reading</label>
-               <input type="number" step='any' class="Pr2" name="Pr2"><br>
-
-               <label for="" class="l_science">Science</label>
-               <input type="number" step='any' class="Pr3" name="Pr3"><br>
-
-               <label for="" class="l_math">Math</label>
-               <input type="number" step='any' class="Pr4" name="Pr4"><br>
-
-               <label for="" class="l_logic">Logic</label>
-               <input type="number" step='any' class="Pr5" name="Pr5"><br>
-               </div>
-				</li>
-			</ul>
-      <!-- <a href="/result" name="submit"  class="form-btn"  type="submit"><button>Student</button></a> -->
-            <button type="submit" class="form-btn" id="btn1" style="display: none;">PREDICT</button>
-
-            <style> 
-             .form-btn{
-                    background: crimson;
-                    color:crimson;
-                    text-transform: capitalize;
-                    cursor: pointer;
-                    width: 10%;
-                    padding:15px 20px;
-                    font-size: 17px;
-                    margin:8px 0;
-                    background: #eee;
-                    border-radius: 10px;
-                    display: flex;
-                    justify-content:center;
-                 
-              }
-
-                .form-btn:hover{
-                    background: crimson;
-                    color:#fff;
-                  }
-                 /* a
-                  {
-                    width: 10%;
-                    padding:20px 20px;
-                    font-size: 17px;
-                    margin:8px 0;
-                    background: #eee;
-                    border-radius: 10px;
-                    display: flex;
-                    justify-content:center
-                  } */
-
-            </style>
-    	</form>
-		<button class="form-btn" onclick="btn1(), btn2()">PREDICT</button>
+					}
+					.form-btn:hover{
+						background: crimson;
+						color:#fff;
+					}
+				</style>
+			</form>
 		</div>
 	</div>
 </main>
-		<!-- MAIN -->
 	</section>
 
 	<!-- Modal -->
@@ -241,20 +137,15 @@
 									<h3>Name: {{ auth_user.first_name }} {{ auth_user.middle_name }} {{ auth_user.last_name }}</h3> 
 							</div>
 							<div class="user-right">
-									<h4>Email: {{ auth_user.first_name }}</h4>
-									<h4>Email: {{ auth_user.first_name }}</h4>
+								<h4>Email: {{ auth_user.first_name }}</h4>
+								<h4>Email: {{ auth_user.first_name }}</h4>
 							</div>
 						</div>
-
 						<button>Edit Profile</button>
 						<button>Close</button>
 					</div>
-
 				</div>
-
 	<!-- CONTENT -->
-	
-
 	<script src="script.js"></script>
 	<script>
 		 var form1= document.getElementById("form1");
@@ -276,12 +167,6 @@
 			}
 		 }
 
-		 function btn1(){
-			document.getElementById("btn1").click();
-		 }
-		 function btn2(){
-			document.getElementById("btn2").click();
-		 }
 	</script>
 </body>
 </html>

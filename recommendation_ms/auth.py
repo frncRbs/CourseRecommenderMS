@@ -25,7 +25,6 @@ def send_link(user_email, user_department):
     '''
     mail.send(msg)
     
-    
 def send_link_disapproved(user_email):
     msg = Message('The account registration has been rejected.', sender='support@wetechsupport.online', recipients=[user_email])
     msg.body = f'''Account registration has been rejected!, Please contact your advisor for further details.
